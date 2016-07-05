@@ -1,0 +1,26 @@
+{
+  "name": "node-sgbus",
+  "version": "1.0.0",
+  "description": "API wrapper for Singapore Bus service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myrtleTree33/node-sgbus.git"
+  },
+  "keywords": [
+    "SG",
+    "Singapore",
+    "Bus",
+    "Service",
+    "LTA"
+  ],
+  "author": "jhtong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myrtleTree33/node-sgbus/issues"
+  },
+  "homepage": "https://github.com/myrtleTree33/node-sgbus#readme"
+}
