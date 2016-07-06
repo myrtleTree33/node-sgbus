@@ -23,6 +23,11 @@ StationManager.prototype.init = Promise.promisify(function(cb) {
   });
 });
 
+StationManager.prototype.getBuses = Promise.promisify(params, function(cb) {
+  log.info('Fetching buses at station..');
+  // TODO add endpoint to retrieve buses
+});
+
 var a = new StationManager();
 a.init().then(function(val) {
   console.log(val.length);
