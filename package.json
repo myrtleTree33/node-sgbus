@@ -26,5 +26,9 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "fibers": "^1.0.13",
+    "q": "^1.4.1"
   }
 }

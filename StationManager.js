@@ -7,7 +7,6 @@ function StationManager() {
 }
 
 StationManager.prototype.init = function() {
-  console.log(config['UniqueUserID']);
   request({
     url: 'http://datamall2.mytransport.sg/ltaodataservice/BusStops',
     method: 'GET',
@@ -27,4 +26,4 @@ StationManager.prototype.init = function() {
 var a = new StationManager();
 a.init();
 
-// module.exports = StationManager;
+module.exports = StationManager;
