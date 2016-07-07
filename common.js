@@ -1,5 +1,6 @@
 var Future = require('fibers/future'),
-  request = Future.wrap(require('request'));
+  request = Future.wrap(require('request')),
+  _ = require('lodash');
 
 var Common = function() {
 };
@@ -33,13 +34,14 @@ Common.prototype.retrieve = performRequest.future();
 Common.prototype.multipleRetrieve = function(params) {
   var items = [];
   var count = 0;
+  params.qs = params.qs || {};
+  params.qs = _.extend({$skip: count}, params.qs);
   while (true) {
-    params.qs = {
-      $skip: count
-    }
+    console.log('retrieved..');
+    params.qs.$skip = count;
     var response = performRequest(params);
-    items = items.concat(response.value);
-    if (response.value.length < 50) {
+    items = items.concat(response[params.dataKey]);
+    if (response[params.dataKey].length < 50) {
       return items;
     } else {
       count += 50;

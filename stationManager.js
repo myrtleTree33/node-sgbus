@@ -16,21 +16,48 @@ StationManager.prototype.init = Promise.promisify(function(cb) {
     url: 'http://datamall2.mytransport.sg/ltaodataservice/BusStops',
     method: 'GET',
     key: config['AccountKey'],
-    uuid: config['UniqueUserID']
+    uuid: config['UniqueUserID'],
+    dataKey: 'value'
   }).resolve(function(err, val) {
     cb(err, val);
     log.info('Fetched stations done.');
   });
 });
 
-StationManager.prototype.getBuses = Promise.promisify(params, function(cb) {
+StationManager.prototype.getBuses = Promise.promisify(function(params, cb) {
+  var busStopId = params.qs.BusStopID;
   log.info('Fetching buses at station..');
-  // TODO add endpoint to retrieve buses
+  Common.multipleRetrieve({
+    url: 'http://datamall2.mytransport.sg/ltaodataservice/BusArrival',
+    method: 'GET',
+    key: config['AccountKey'],
+    uuid: config['UniqueUserID'],
+    qs: {
+      BusStopID: busStopId
+    },
+    dataKey: 'Services'
+  }).resolve(function(err, val) {
+    cb(err, {
+      busStopId: busStopId,
+      buses: val
+    });
+    log.info('Fetched stations done.');
+  });
 });
 
-var a = new StationManager();
-a.init().then(function(val) {
-  console.log(val.length);
+// var a = new StationManager();
+// a.init().then(function(stations) {
+//   console.log(stations.length);
+// });
+
+var b = new StationManager();
+b.getBuses({
+  qs: {
+    BusStopID: '85099'
+  }
+}).then(function(data) {
+  console.log(data);
 });
+
 
 module.exports = StationManager;
